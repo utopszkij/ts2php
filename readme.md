@@ -1,7 +1,6 @@
+# Typescript to php source converter
 
-#Typescript to php source converter
-
-!((https://github.com/utopszkij/ts2php/blob/master/doc/ts2php.png)) 
+!(https://github.com/utopszkij/ts2php/blob/master/doc/ts2php.png) 
 
 Php is a non type oriented language, resulting in syntax errors, strikes
 most of it is only running time (better during testing,
@@ -19,26 +18,26 @@ this is done by using libraries for this purpose.
 Due to the incompatibility of the two languages there are several javascript / typescript options
 should be avoided.
 
-##version
+## version
 V 1.00  in developing; test version
 
-##licence
+## licence
 GNU/GPL
 
-##syntax
+## syntax
 
-[See the available syntax here.](https://github.com/utopszkij/ts2php/blob/master/doc/syntax.rm)
+[See the available syntax here.](https://github.com/utopszkij/ts2php/blob/master/doc/syntax.md)
 
-##request
+## request
 
 - tsc  typescript compiller
 - php  php interpreter
 
-##use
+## use
 
 >ts2php tsFileName  (tsFileName without '.ts')
 
-##install
+## install
 
 - cd 'this_repo_root'
 - sudo cp ./sbin/ts2php /sbin/ts2php
@@ -47,11 +46,11 @@ GNU/GPL
 - sudo chmod 0444 /sbin/ts2php.php
 - sudo cp ./ts2php_core/* 'your project repo'/ts2php_core
 
-##example:
+## example:
 
 >ts2php ./test/test
 
-#Typescript --> php forrás konverter
+# Typescript --> php forrás konverter
 
 A php nem típusos nyelv, ennek következtében a szintaktikai hibák, elütések 
 nagy része csak futási időben (jobb esetben a tesztelés során, 
@@ -69,27 +68,27 @@ erre a célra készült függvény könyvtárak segítségével valósul meg.
 A két nyelv inkompatibilitása miatt jónéhány javascript/typescript lehetőség
 használatát mellőzni kell.
 
-##verzió
+## verzió
 V 1.00  fejlesztés altt, teszt verzió
 
-##licsz
+## licsz
 GNU/GPL
 
-##szintaxis
+## szintaxis
 
->[A használható szintaxist lásd itt.](https://github.com/utopszkij/ts2php/blob/master/doc/syntax.rm)
+>[A használható szintaxist lásd itt.](https://github.com/utopszkij/ts2php/blob/master/doc/syntax.md)
 
 
-##Szükséges szoftver elemek
+## Szükséges szoftver elemek
 
 - tsc
 - php
 
-##használt
+## használt
 
 >ts2php tsFileName  (tsFileName ne tartalmazza a '.ts' -t)
 
-##telepités
+## telepités
 
 - cd 'this_repo_root'
 - sudo cp ./sbin/ts2php /sbin/ts2php
@@ -98,7 +97,7 @@ GNU/GPL
 - sudo chmod 0444 /sbin/ts2php.php
 - sudo cp ./ts2php_core/* 'your project repo'/ts2php_core
 
-##példa:
+## példa:
 
 >cd test
 

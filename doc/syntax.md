@@ -1,16 +1,16 @@
 # ts2php usable syntax
 
-##include
+## include
 
 >**import** { list of class names } **from** "fileName";
 
 >fileName not include ".ts"
 
-##export
+## export
 
 >**expor** name, name,....;
 
-##constans
+## constans
 
 >'characters double quotation marks are allowed'	
 
@@ -24,11 +24,11 @@
 
 >\-12.13
 
-##variable names
+## variable names
 
 >small and large letters, digits and underscore, begins with the letter	
 
-##data types
+## data types
 
 - **number**
 - **string**
@@ -39,7 +39,7 @@
 - **void**
 - defined class names
 
-##declare variable and set value
+## declare variable and set value
 
 >**var** variableName: dataType = expression;
 
@@ -51,7 +51,7 @@
 
 >variableName += expression;    (string concatenation)
 
-##exression
+## exression
 >items:
 
 - variableName
@@ -72,23 +72,23 @@
 - '++'
 - '--'	
 
-##functions
-###declare function
+## functions
+### declare function
 
 >**function** functionName(list of params): dataType { code }
 
-###use function in exression
+### use function in exression
 
 >functionName(list of values)
 
-###list of params
+### list of params
 >name: dataType, ...
 
 >or
 
 >name?: dataType, ....
 
-###list of value
+### list of value
 
 >constans or expression or variableName, ....
 
@@ -96,7 +96,7 @@
 
 >**The methods of the javascript standard array object can not be used.**
 
-##branching
+## branching
 
 >**if** (logical expression) { code }
 
@@ -104,19 +104,19 @@
 
 >**if** (logical expression) { code } **else** { code }
 
-##lopps
+## lopps
 
 - **for** (name = expression; logical_expression;  code) { code}
 - **for** (**let** itemName **in** arrayName) { code }
 - **while** (logical_expression) { code }
 
-##eror handing
+## eror handing
 
 >**try** { code } **catch(e)** { code }
 
 >generate error: **throw new Error**('error msg');
 
-##Mathematical functions; Predefined Math object instance
+## Mathematical functions; Predefined Math object instance
 
 ### methods
 
@@ -135,12 +135,12 @@
 - **sqrt**(x)
 - **tan**(x)
 
-##Date time handing; Predefined Date class
-###constructor
+## Date time handing; Predefined Date class
+### constructor
 
 >name = **new Date**(str or number);
 
-###public methods
+### public methods
 
 - **getDate**() 	Returns the day of the month (from 1-31)
 - **getDay**() 	Returns the day of the week (from 0-6)
@@ -164,7 +164,7 @@
 - **toLocaleTimeString**() 	Returns the time portion of a Date object as a string, using locale conventions
 - **toLocaleString**() 	Converts a Date object to a string, using locale conventions
 
-##predefined global functions
+## predefined global functions
 
 - **decodeURI**(s: string): string 	Decodes a URI
 - **encodeURI**(s: string): string 	Encodes a URI
@@ -175,14 +175,14 @@
 - **parseInt**(s: string): number 	Parses a string and returns an integer
 - **String**(x: any): string 	Converts an object's value to a string
 
-##predefined global vars for php compatibility
+## predefined global vars for php compatibility
 - **\_GET**: any[]
 - **\_POST**: any[]
 - **\_SERVER**: any[]
 - **\_CHOCKIE**: any[]
 - **\_SESSION**: any[]
 
-##predefined global functions for php compatibility
+## predefined global functions for php compatibility
 - **echo**(str: string): void
 - **exit**(x: number): void
 - **isset**(x:any): boolean
@@ -191,8 +191,8 @@
 - **base64_encode**(s: string): string
 - **base64_decode**(s: string): string
 
-##classes, objects
-###declare class
+## classes, objects
+### declare class
 ```
 	class name extends parentClass {
 	  constructor(list of params) { code }
@@ -206,37 +206,37 @@
 	  body of class
 	}
 ```
-###body of class
+### body of class
 
 - **public|protected|private** name: dataType;
 - **public|protected|private** name(list of params): dataType { code };
 
-###create an object instance
+### create an object instance
 >name = **new** className(list of params);
 
 >or
 
 >name = { json object string not include function }
 
-###use object public property in expression
+### use object public property in expression
 
 >objectName.propertyName
 
-###use self property
+### use self property
 
 >**this**.propertyName
 
-###use public metods in expression
+### use public metods in expression
 
 >objektName.methodName(value list)
 
-###use self methods
+### use self methods
 
 >**this**.methodName(value list)
 
 
 
-##String handing;  predefined Xstr objects
+## String handing;  predefined Xstr objects
 ### constructor
 >**var** variableName = **new Xstrs**(strExpression);
 
@@ -244,10 +244,10 @@
 
 >**var** variableName = **XSTR**(strExpression);
 
-###public property
+### public property
 - **value**: string
 
-###public methods
+### public methods
 
 - **get**(): string 
 - **set**(value: string): void 
@@ -265,7 +265,7 @@
 - **charAt**(i: number): string 
 - **charCodeAt**(i: number): number 
 
-##Array handing; Predefined Xarray object
+## Array handing; Predefined Xarray object
 ### constructor
 >**var** variableName = **new Xarray**(array);
 
@@ -273,10 +273,10 @@
 
 >**var** variableName = **XARRAY**(array);
 
-###public property
+### public property
 - **values**: any[]
 
-###public methods
+### public methods
 
 - **toString**(): Xstr 
 - **loadFromJson**(s: string): void 
@@ -302,12 +302,12 @@
 - **insert**(value:any): void 
 - **goto**(i: number): any 
 
-##Database habding; Predefindex Xdb class
-###construction
+## Database habding; Predefindex Xdb class
+### construction
 
 >name = **new Xdb**();
 
-###public methods
+### public methods
 
 - **setQuery**(str: string)
 - **getQuery**():string
@@ -318,12 +318,12 @@
 - **loadObjectList**():any[]
 - **quote**(str):string
 
-##File handing; Predefined Xfile class
-###construction
+## File handing; Predefined Xfile class
+### construction
 
 >name = **new Xfile**();
 
-###public methods
+### public methods
 
 - **readdir**(path: string): any[]
 - **load**(fileName: string): string
@@ -334,11 +334,11 @@
 - **mkdir**(path: string, mod: string): boolean      mod example: '0777'
 - **chmod**(fileName: string, mod: string): boolean  mod example: '0777'
 
-##embed HTML code
+## embed HTML code
 
 >**\/\*html**  html code **html\*\/**
 
-##embed PHP code 
+## embed PHP code 
 
 >**\/\*php** php code **php\*\/**
 
