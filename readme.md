@@ -1,6 +1,6 @@
 # Typescript to php source converter
 
-!(https://github.com/utopszkij/ts2php/blob/master/doc/ts2php.png) 
+![ts2phplogo](https://github.com/utopszkij/ts2php/blob/master/doc/ts2php.png) 
 
 Php is a non type oriented language, resulting in syntax errors, strikes
 most of it is only running time (better during testing,
