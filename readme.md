@@ -71,7 +71,7 @@ használatát mellőzni kell.
 ## verzió
 V 1.00  fejlesztés altt, teszt verzió
 
-## licsz
+## licensz
 GNU/GPL
 
 ## szintaxis
@@ -84,7 +84,7 @@ GNU/GPL
 - tsc
 - php
 
-## használt
+## használat
 
 >ts2php tsFileName  (tsFileName ne tartalmazza a '.ts' -t)
 
