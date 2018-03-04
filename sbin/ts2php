@@ -1,0 +1,12 @@
+#!/bin/bash
+echo 'ts to php comnverter'
+if [ $# != 2 ] 
+	then
+		echo -n 'tsc start '; date +%T
+		tsc --module commonjs $1.ts 
+		echo -n 'tsc stop '; date +%T
+		rm $1.js
+		php /sbin/ts2php.php $1
+	else
+		echo 'use ts2php tsFileName (without .ts)'
+fi

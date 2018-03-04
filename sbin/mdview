@@ -1,0 +1,4 @@
+# makdown (.md) viewer  requed pandoc
+pandoc $1 > $1.html;
+firefox $1.html;
+
