@@ -307,7 +307,8 @@
 - **insert**(value:any): void 
 - **goto**(i: number): any 
 
-## Database habding; Predefindex Xdb class for php compatibility
+## Database handing; Predefindex Xdb class for php compatibility
+
 ### construction
 
 >name = **new Xdb**();
@@ -315,13 +316,29 @@
 ### public methods
 
 - **setQuery**(str: string)
-- **getQuery**():string
-- **getErrorMsg**():string
-- **getErrorNum**:number
-- **query**():boolean
-- **loadObject**():object
-- **loadObjectList**():any[]
-- **quote**(str):string
+- **getQuery**(): string
+- **setParam**(paramName: string, value: string): void
+- **getErrorMsg**(): string
+- **getErrorNum**(): number
+- **query**(): boolean
+- **loadObject**(): record_object
+- **loadObjectList**(): any[]
+- **quote**(str): string
+
+## database table handing predefined Xtable class
+
+### construction
+
+>name = **new Xtable**(db: Xdb, tableName: string, keyName?: string);
+
+### public methods
+
+- **insert**(record: object): boolean
+- **update**(record: object): boolean
+- **save**(record: object): boolean
+- **remove**(key: string): boolean
+- **getErrorNum**(): number
+- **getErrorMsg**(): string
 
 ## File handing; Predefined Xfile class for php compatibility
 ### construction

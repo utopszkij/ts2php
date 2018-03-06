@@ -286,9 +286,15 @@ export function XSTR(s?: string) {
 */
 export class Xdb {
 	private sql: string = '';
-	// set query string
+
+	// set query string '$paramName' allowed in sql string
 	setQuery(sql?: string): void {
 		this.sql = sql;
+		return;
+	}
+
+	// define param
+	setParam(paramName: string, value: string): void {
 		return;
 	}
 

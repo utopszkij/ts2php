@@ -9,6 +9,7 @@ class Xdb {
 	private $_errorNum = 0;
 	private $_errorMsg = '';
 	private $_mysqli = false;
+	private $_params = array();
 	
 	public $dbPre = 'np_'; // tableName prefix (#__ replace)
 	
@@ -33,12 +34,33 @@ class Xdb {
 	
 	/**
 	* set query string
-	* @param string
+	* @param string sql string '$paramName' allowed
 	* @return void
 	*/
 	public function setQuery($sql) {
 		$this->_sql = str_replace('#__',$this->dbPre,$sql);
 		return;	
+	}
+
+	/**
+	* define params
+	* @param string param name without '$'
+	* @param string
+	*/
+	public function setParam($paramName, $value) {
+		$this->_params[$paramName] = $value;	
+	}
+
+	/**
+	* prepare params to sql
+	$ @return string
+	*/
+	private function prepare() {
+		$result = $this->_sql;
+		foreach ($this->_params as $fn => $fv) {
+			$result = $str_replace('$'.$fn, $fv, $result);
+		}
+		return $result;
 	}
 	
 	/**
@@ -46,7 +68,7 @@ class Xdb {
 	* @return string
 	*/
 	public function getQuery() {
-		return $this->_sql;
+		return $this->prepare();
 	}
 
 	private function debugFun($result = 'none') {
@@ -68,7 +90,7 @@ class Xdb {
 	*/
 	public function loadObjectList() {
 		$result = array();
-		$res = $this->_mysqli->query($this->_sql);
+		$res = $this->_mysqli->query($this->prepare());
 		$this->_errorNum = $this->_mysqli->errno;
 		$this->_errorMsg = $this->_mysqli->error;
 		if ($res) {
@@ -100,7 +122,7 @@ class Xdb {
 	* @return true or false
 	*/
 	public function query() {
-		$this->_mysqli->query($this->_sql);
+		$this->_mysqli->query($this->prepare());
 		$this->_errorNum = $this->_mysqli->errno;
 		$this->_errorMsg = $this->_mysqli->error;
 		$this->debugFun(($this->_errorNum == 0));
