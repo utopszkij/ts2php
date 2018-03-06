@@ -3,8 +3,8 @@
 * routines, objects for php compatibility
 *
 * exports: Xarray, XARRAY, Xstr, XSTR, Xdate, XDATE,
-* Xdb, Xfile, 
-* _GET, _POST, _SERVER, _CHOCKIE
+* Xdb, Xtable, Xfile, 
+* _GET, _POST, _SERVER, _CHOCKIE, _SESSION
 * echo, exit, isset, file_get_contents, session_start, session_id,
 * base64_decode, base64_encode
 */
@@ -287,7 +287,7 @@ export function XSTR(s?: string) {
 export class Xdb {
 	private sql: string = '';
 	// set query string
-	setQuery(sql: string): void {
+	setQuery(sql?: string): void {
 		this.sql = sql;
 		return;
 	}
@@ -329,39 +329,92 @@ export class Xdb {
 }
 
 /**
+* sql table handing  (impelemented only php)
+*/
+export class XTable {
+	constructor(db: Xdb, tableName: string, keyName?: string) {}
+
+	// insert nyew record param: record object
+	public insert(record: any): boolean { return true; }
+
+	// update one record param: record object
+	public update(ecord: any): boolean { return true; }
+
+	// insert or update one record  paraM. record object
+	public save(record: any): boolean { return true; }
+
+	// remove one record  param: key balue
+	public remove(id: any): boolean { return true; }
+
+	// get last error Number
+	public getErrorNum(): number { return 0; }
+
+	// get last error msg
+	public getErrorMsg(): string { return ''; }
+	
+}
+/**
 * file processing  implemented only in php
 */
 export class Xfile {
+	// read filenames from one filder
 	public readdir(path: string): string[] {
 		return [];
 	}
+
+	// load string from one file
 	public load(fileName: string):string {
 		return '';
 	}
+
+	// save string to file
 	public save(fileName: string, data: string): boolean {
 		return true;
 	}
+
+	// remove one file
 	public rm(fileName: string) : boolean {
 		return true;
 	}
+
+	// rename one file
 	public rename(oldFileName: string, newFileName: string): boolean {
 		return true;
 	}
+
+	// remove one empty folder
 	public rmdir(fileName: string): boolean {
 		return true;
 	}
+
+	// create new folder
 	public mkdir(path: string, mod: string): boolean {
 		return true;
 	}
+
+	// change file permission
 	public chmod(fileName: string, mod: string): boolean {
 		return true;
 	}
+
+	// change file owner
 	public chown(fileName: string, own: string): boolean {
+		return true;
+	}
+
+
+	// check file exists?
+	public file_exists(fileName: string): boolean {
+		return true;
+	}
+
+	// check folder exists?
+	public dir_exists(dirName: string): boolean {
 		return true;
 	}
 }
 
-// echo to stdout
+// echo to stdoutput
 export function echo(s: any): void {
 	console.log(s);
 }
@@ -382,7 +435,7 @@ export function isset(x?: any): boolean {
 	return result;
 }
 
-// php file_get implemented only php
+// php file_get_contests implemented only php
 export function file_get_contents(s: string): string {
 	return '';
 }
@@ -398,25 +451,4 @@ export function base64_encode(s: string): string {
 export function base64_decode(s: string): string {
 	return s;
 }
-
-
-/* Can use Javascript default 
-	Math..... in php  MATH()........
-		abx(x)
-		acos(x)
-		atan(x)
-		asin(x)
-		cos(x)
-		flour(x) // lefelé csonkit egészre
-		min(x1,x2)
-		max(x1,x2)
-		pow(x) // felfelé kerekit egészre
-		round(x)
-		random() // retorn 0......0.999999
-		sin(x)
-		sqrt(x)
-		tan(x)
-	Date
-		
-*/
 

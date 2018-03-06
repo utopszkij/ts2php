@@ -21,6 +21,20 @@ should be avoided.
 ## version
 V 1.00  in developing; test version
 
+## implemented php properties
+
+- constants
+- variables
+- arrays
+- classes and objects
+- logical, arithmetic and character expressions
+- session treatment
+- URI coding, decoding
+- base64 treatment
+- GET, POST, file_get_content treatment
+- mysql treatment
+- file and directory management
+
 ## licence
 GNU/GPL
 
@@ -30,8 +44,8 @@ GNU/GPL
 
 ## request
 
-- tsc  typescript compiller
-- php  php interpreter
+- [tsc  typescript compiller](https://www.typescriptlang.org/)
+- [php  php interpreter](http://php.net)
 
 ## use
 
@@ -71,6 +85,20 @@ használatát mellőzni kell.
 ## verzió
 V 1.00  fejlesztés altt, teszt verzió
 
+##megvalósított php tulajdonságok
+
+- konstansok
+- változók
+- tömbök
+- osztályok és objektumok
+- logikai, aritmetikai és karakteres kifejezések
+- session kezelés
+- URI kodolás, dekodolás
+- base64 kezelés
+- GET, POST, file_get_content kezelés
+- mysql kezelés
+- file és könyvtár kezelés
+
 ## licensz
 GNU/GPL
 
@@ -81,8 +109,8 @@ GNU/GPL
 
 ## Szükséges szoftver elemek
 
-- tsc
-- php
+- [tsc  typescript compiller](https://www.typescriptlang.org/)
+- [php  php interpreter](http://php.net)
 
 ## használat
 

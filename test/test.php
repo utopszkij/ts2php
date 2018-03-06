@@ -1,5 +1,5 @@
 <?php
-// generated the ts2php 2018.03.04 09:00:19
+// generated the ts2php 2018.03.06 07:34:20
 
 /** 
 * példa ts file 
@@ -9,9 +9,6 @@
 include_once "../ts2php_core/tsphpx.php";
 
 $mytomb = XARRAY();
-$console->log('mytomb.count()='+$mytomb->count());
-
-$_POST['abc'] = $_GET['abc'];
 
 class Szemely {
 	protected $_firstName;
@@ -52,25 +49,25 @@ class Ember extends Szemely  {
 		return $this->getFullName() . ' ' . $this->_age;
 	}
 	public function dump($aray) {
-		foreach (this->tomb as $key => $value) {
-			echo($key+' => '+$aray[$key]);
+		foreach ($this->tomb as $key => $value) {
+			echo($key . ' => ' . $aray[$key] . "\n");
 		}
 	}
 
 }
-function _ember($$fn,$$ln,$$a) {
-	return new Ember($$fn,$$ln,$$a);
+function _ember($fn,$ln,$a) {
+	return new Ember($fn,$ln,$a);
 }
 
-echo(_ember('A','B',12)->getData());
+echo(_ember('A','B',12)->getData() . "\n");
 
 $szoveg = "ez \"macsakkörömben van\"";
 $szoveg .= ' 123';
 $tomb = array(1, 2, 'aaa', JSON_decode('{"nev":"FT", "tel":array(1,2,3)}'));
 $obj = JSON_decode('{"a":"AAA", "B":123}');
 $ember = new Ember('Teszt','Elek',22);
-echo($ember->getFullName());
-echo($ember->getData());
+echo($ember->getFullName() . "\n");
+echo($ember->getData() . "\n");
 
 function proba($obj)  {
 	return $obj->getFullName();
@@ -78,12 +75,21 @@ function proba($obj)  {
 
 $i = 12.5;
 for ($i = 0; $i < 10; $i++) {
-	echo($i);
+	echo($i . "\n");
 }
 
 $szam = 12;
-echo(proba($ember));
+echo(proba($ember) . "\n");
 $ember->dump($ember->tomb);
+
+$db = new Xdb();
+$db->setQuery(' 
+select *
+from #__tableName
+where title <> "emty"
+order by created_time
+');
+$records = $db->loadObjectList();
 
 exit(2);
 

@@ -10,9 +10,6 @@ import {Xarray, XARRAY, Xstr, XSTR, Xdb,
 	from "../ts2php_core/tsphp";
 
 var mytomb = XARRAY();
-console.log('mytomb.count()='+mytomb.count());
-
-_POST['abc'] = _GET['abc'];
 
 class Szemely {
 	protected _firstName: string;
@@ -51,24 +48,24 @@ class Ember extends Szemely {
 	}
 	public dump(aray: string[]): void {
 		for (let key in this.tomb) {
-			echo(key+' => '+aray[key]);
+			echo(key + ' => ' + aray[key] + "\n");
 		}
 	}
 
 }
-function _ember($fn,$ln,$a) {
-	return new Ember($fn,$ln,$a);
+function _ember(fn,ln,a) {
+	return new Ember(fn,ln,a);
 }
 
-echo(_ember('A','B',12).getData());
+echo(_ember('A','B',12).getData() + "\n");
 
 var szoveg = "ez \"macsakkörömben van\"";
 szoveg += ' 123';
 var tomb = [1, 2, 'aaa', {"nev":"FT", "tel":[1,2,3]}];
 var obj = {"a":"AAA", "B":123};
 var ember = new Ember('Teszt','Elek',22);
-echo(ember.getFullName());
-echo(ember.getData());
+echo(ember.getFullName() + "\n");
+echo(ember.getData() + "\n");
 
 function proba(obj: Pofa) : string {
 	return obj.getFullName();
@@ -76,12 +73,21 @@ function proba(obj: Pofa) : string {
 
 var i: number = 12.5;
 for (i = 0; i < 10; i++) {
-	echo(i);
+	echo(i + "\n");
 }
 
 var szam: number = 12;
-echo(proba(ember));
+echo(proba(ember) + "\n");
 ember.dump(ember.tomb);
+
+var db = new Xdb();
+db.setQuery(/*' 
+select *
+from #__tableName
+where title <> "emty"
+order by created_time
+'*/);
+var records = db.loadObjectList();
 
 exit(2);
 

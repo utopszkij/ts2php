@@ -1,12 +1,23 @@
 #!/bin/bash
-echo 'ts to php comnverter'
-if [ $# != 2 ] 
+echo 'ts to php source converter'
+echo ''
+if [ $# -eq 1 ] && [ $1 != "--help" ]
 	then
 		echo -n 'tsc start '; date +%T
 		tsc --module commonjs $1.ts 
 		echo -n 'tsc stop '; date +%T
-		rm $1.js
-		php /sbin/ts2php.php $1
+		if [ ! $? -eq 0 ]; then
+    	echo "=== Error is tsc ==="
+		else
+			rm $1.js
+			php /sbin/ts2php.php $1
+			if [ ! $? -eq 0 ]; then
+	    	echo "=== Error is ts2php ==="
+				rm $1.php
+			fi
+		fi		
 	else
-		echo 'use ts2php tsFileName (without .ts)'
+		echo ''
+		echo '   use ts2php tsFileName (without .ts)'
+		echo ''
 fi

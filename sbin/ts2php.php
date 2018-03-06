@@ -7,6 +7,9 @@
 /**
 * ts file process object
 */
+
+global $exitCode;
+
 class Ts {
 	private $tsString; // typescript
 	private $cp;       // char pointer for getc
@@ -180,6 +183,7 @@ class Ts {
 	* @return string
 	*/
 	public function getLiteral($start, $stop) {
+		global $exitCode;
 		$result = '';
 		$counter = 0; // subliteral counter
 		$i = 0; // loop counter
@@ -203,6 +207,7 @@ class Ts {
 			$result .= $c;
 		} else {
 			echo 'ts2php syntax error line='.$this->lno.' not balanced '.$start.$stop."\n"; 	
+			$exitCode = 1;
 		}
 		// echo 'getLiteral '.$start.$stop.' result='.$result."\n";
 		return $result;
@@ -214,11 +219,13 @@ function mnemonic($s) {
 }
 
 function processClass(& $ts) {
+	global $exitCode;
 	$result = '';
 	$t1 = $ts->getBlankToken(); // ' '
 	$t2 = $ts->getToken(); // className
 	if (($t2 == '') || (!mnemonic($t2))) {
 		echo 'ts2php syntax error line='.$ts->lno.' not valid class name '.$t2."\n"; 	
+		$exitCode = 1;
 	}
 	$t3 = $ts->getBlankToken(); // ' '
 	$t4 = $ts->getToken(); // extends ?
@@ -235,11 +242,13 @@ function processClass(& $ts) {
 
 // next public | protected | private 
 function processDec(& $ts, $t) {
+	global $exitCode;
 	$result = '';
 	$t1 = $ts->getBlankToken(); // ' ';
 	$t2 = $ts->getToken(); // név
 	if (!mnemonic($t2)) {
 		echo 'ts2php syntax error line='.$ts->lno.' '.$t2.' not mnemonic '."\n"; 
+		$exitCode = 1;
 	}
 	$t3 = $ts->getToken(); // : vagy ( ?
 	if ($t3 == ':') {
@@ -252,11 +261,13 @@ function processDec(& $ts, $t) {
 		$result .=  $t.$t1.'function '.$t2;
 	} else {
 		echo 'ts2php syntax error line='.$ts->lno.' not expected token '.$t.$t1.$t2.$t3."\n"; 
+		$exitCode = 1;
 	}
 	return $result;
 }
 
 function processTypeDef(& $ts, $t) {
+	global $exitCode;
 	$result = '';
 	$t1 = $ts->getBlankToken(); // ' ';
 	$t2 = $ts->getToken(); // tipusnév vagy [
@@ -269,6 +280,7 @@ function processTypeDef(& $ts, $t) {
 			$t4 = $ts->getToken(); // ]
 			if ($t4 != ']') {
 				echo 'ts2php syntax error line='.$ts->lno.'not expected token '.$t.$t1.$t2.$t3.$t4."\n"; 
+				$exitCode = 1;
 			}
 		} else {
 			$ts->backToken($t3);
@@ -361,6 +373,7 @@ function processConstructor(& $ts, $t) {
 }
 
 function processImport(& $ts, $t) {
+	global $exitCode;
 	$result = '';
 	$t0 = $ts->getBlankToken();
 	$t1 = $ts->getLiteral('{','}');
@@ -368,6 +381,7 @@ function processImport(& $ts, $t) {
 	$t3 = $ts->getToken(); // from
 	if ($t3 != 'from') {
 		echo 'ts2php syntax error line='.$ts->lno.' excepted "from" actual:"'.$t3.'"'."\n"; 
+		$exitCode = 1;
 	}
 	$t4 = $ts->getBlankToken();
 	$t5 = $ts->getLiteral('"','"').$ts->getToken(); // "....";
@@ -389,7 +403,7 @@ function processFor(& $ts, $t) {
 		$t7 = $ts->getToken(); // in
 		$t8 = $ts->getBlankToken(); // ' '
 		$t9 = $ts->getToken(); // array
-		$tw = $ts->getToken();
+		$tw = $ts->getToken(); // )
 		while ($tw != ')') {
 			if ($tw == '.')
 				$t9 .= '->';
@@ -397,7 +411,7 @@ function processFor(& $ts, $t) {
 				$t9 .= $tw;
 			$tw = $ts->getToken();
 		}
-		$result .=  'foreach ('.$t9.' as $'.$t5.' => $value)';
+		$result .=  'foreach ($'.$t9.' as $'.$t5.' => $value)';
 	} else {
 		$ts->backToken($t3);
 		$ts->backToken($t2);
@@ -425,6 +439,8 @@ function processComment(& $ts) {
 	$w = str_replace('html*/','<?php',$w);
 	$w = str_replace('/*php','',$w);
 	$w = str_replace('php*/','',$w);
+	$w = str_replace("/*'","'",$w);
+	$w = str_replace("'*/","'",$w);
 	return $w;
 }
 
@@ -436,6 +452,7 @@ function processComment(& $ts) {
 * @return string
 */	
 function parser(& $ts, $terminator, $terminatorResult) {
+	global $exitCode;
 	$result = '';
 	$lastToken = '';
 	$t = $ts->getToken();
@@ -535,6 +552,7 @@ function parser(& $ts, $terminator, $terminatorResult) {
 }
 
 // main
+$exitCode = 0;
 echo 'ts2php start '.date('H:i:s')."\n";
 $ts = new Ts($argv[1]);
 $result =  '<?php'."\n";
@@ -545,6 +563,6 @@ $fp = fopen($argv[1].'.php','w+');
 fwrite($fp, $result);
 fclose($fp);
 echo 'ts2php stop '.date('H:i:s')."\n";
-exit();
+exit($exitCode);
 ?>
 

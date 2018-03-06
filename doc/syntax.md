@@ -2,7 +2,7 @@
 
 ## include
 
->**import** { list of class names } **from** "fileName";
+>**import** { list of class names, function names, var names } **from** "fileName";
 
 >fileName not include ".ts"
 
@@ -15,6 +15,8 @@
 >'characters double quotation marks are allowed'	
 
 >"characters apostroph, \\", \\r, \\n, \\t, \\\\, are allowed"	
+
+>/*' multiline string constant double quotation marks are allowed '*/
 
 >1234
 
@@ -72,6 +74,13 @@
 - '++'
 - '--'	
 
+>**The methods of the javascript standard string object can not be used!**
+
+>**The methods of the javascript standard array object can not be used!**
+
+>see below Xstr and Xarray prdefined classess!
+
+
 ## functions
 ### declare function
 
@@ -91,10 +100,6 @@
 ### list of value
 
 >constans or expression or variableName, ....
-
->**The methods of the javascript standard string object can not be used.**
-
->**The methods of the javascript standard array object can not be used.**
 
 ## branching
 
@@ -236,7 +241,7 @@
 
 
 
-## String handing;  predefined Xstr objects
+## String handing;  predefined Xstr objects for php compability
 ### constructor
 >**var** variableName = **new Xstrs**(strExpression);
 
@@ -265,7 +270,7 @@
 - **charAt**(i: number): string 
 - **charCodeAt**(i: number): number 
 
-## Array handing; Predefined Xarray object
+## Array handing; Predefined Xarray object for php compatibility
 ### constructor
 >**var** variableName = **new Xarray**(array);
 
@@ -302,7 +307,7 @@
 - **insert**(value:any): void 
 - **goto**(i: number): any 
 
-## Database habding; Predefindex Xdb class
+## Database habding; Predefindex Xdb class for php compatibility
 ### construction
 
 >name = **new Xdb**();
@@ -318,7 +323,7 @@
 - **loadObjectList**():any[]
 - **quote**(str):string
 
-## File handing; Predefined Xfile class
+## File handing; Predefined Xfile class for php compatibility
 ### construction
 
 >name = **new Xfile**();
