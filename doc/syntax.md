@@ -16,7 +16,7 @@
 
 >"characters apostroph, \\", \\r, \\n, \\t, \\\\, are allowed"	
 
->/*' multiline string constant double quotation marks are allowed '*/
+>\/\*' multiline string constant double quotation marks are allowed '\*\/
 
 >1234
 
