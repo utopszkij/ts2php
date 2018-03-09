@@ -21,8 +21,12 @@ class Xdb {
 	* @param string dbname
 	* @return object;
 	*/
-	function __construct($host = MYSQL_HOST, $user = MYSQL_USER, $psw = MYSQL_PSW, $dbName = MYSQL_DB) {
-		$this->dbPre = MYSQL_DBPRE;
+	function __construct() {
+		$host = Config('MYSQL_HOST');
+		$user = Config('MYSQL_USER'); 
+		$psw = Config('MYSQL_PSW'); 
+		$dbName = Config('MYSQL_DB');
+		$this->dbPre = Config('MYSQL_DBPRE');
 		$this->_mysqli = new mysqli($host, $user, $psw, $dbName);
 		$this->_errorNum = $this->_mysqli->connect_errno;
 		$this->_errorMsg = $this->_mysqli->connect_error;
@@ -35,20 +39,22 @@ class Xdb {
 	/**
 	* set query string
 	* @param string sql string '$paramName' allowed
-	* @return void
+	* @return $this
 	*/
 	public function setQuery($sql) {
 		$this->_sql = str_replace('#__',$this->dbPre,$sql);
-		return;	
+		return $this;	
 	}
 
 	/**
 	* define params
 	* @param string param name without '$'
 	* @param string
+	* @return $this
 	*/
 	public function setParam($paramName, $value) {
 		$this->_params[$paramName] = $value;	
+		return $this;
 	}
 
 	/**
@@ -72,7 +78,7 @@ class Xdb {
 	}
 
 	private function debugFun($result = 'none') {
-		if (DEBUGMODE) {
+		if (Config('DEBUGMODE')) {
 			if (file_exists('mysqldebug.txt'))
 				$fp = fopen('mysqldebug.txt','a+');
 			else
@@ -246,6 +252,21 @@ class Xdb {
 		}
 		return $result;
 	}
+
+	/**
+	* load objectList by select object
+	* @param object $select
+	* @param integer limitStart
+	* @param integer $limit
+	* @return array of records
+	*/
+	public function loadSelect($select, $limitStart = 0, $limit = -1) {
+		$s = "\n".'LIMIT '.$limitStart;
+		if ($limit > 0) $s .= ','.$limit;
+		if (($limitStart == 0) && ($limit == -1)) $s = '';
+		$this->setQuery($select->toString().$s);
+		return $this->loadObjectList();
+	}
 }
 
 class XTable {
@@ -359,5 +380,149 @@ class XTable {
 	}
 }
 
+/**
+* object oriented sql select 
+*/
+class Xselect {
+	private $fieldList = ''; // sql select string
+	private $from = array(); // [0]:alias, [1]: tableName or select objrect
+	private $joins = array(); // array [0]: join type
+							  //       [1]: alias
+							  //       [2]: alias.tableName or select object		 
+							  //       [3]: ON string	
+  	private $groups = '';     // sql group by string
+	private $unions = array();  // array of select
+	private $where = '';     // sql where string
+	private $having = '';    // sql having string
+	private $order = '';     // sql order by string
+	
+	/**
+	* @param string
+	* @return Xselect
+	*/
+	public function setFieldList($s) {
+		$this->fieldList = $s;
+		return $this;
+	}
+
+	/**
+	* @param string alias
+	* @param string tableName
+	* @return Xselect
+	*/
+	public function setFrom($alias, $table) {
+		$this->from = array($alias, $table);
+		return $this;
+	}
+
+	/**
+	* @param string alias
+	* @param Select object 
+	* @return Xselect
+	*/
+	public function setSubselect($alias, $select) {
+		$this->from = array($alias, $select);
+		return $this;
+	}
+
+	/**
+	* @param string INNER|LEFT OUTER|RIGHT OUTER
+	* @param string alias
+	* @param string tableName
+	* @param string ON
+	* @return Xselect
+	*/
+	public function addJoin($joinType, $alias, $table, $on) {
+		$this->joins[] = array($joinType, $alias, $table, $on);
+		return $this;
+	}
+
+	/**
+	* @param string INNER|LEFT OUTER|RIGHT OUTER
+	* @param string alias
+	* @param Select object
+	* @param string ON
+	* @return Xselect
+	*/
+	public function addSubselectJoin($joinType, $alias, $select, $on) {
+		$this->joins[] = array($joinType, $alias, $select,$on);
+		return $this;
+	}
+
+	/**
+	* @param string
+	* @return Xselect
+	*/
+	public function setGroups($groups) {
+		$this->groups = $groups;
+		return $this;
+	}
+
+	/**
+	* @param Select object
+	* @return Xselect
+	*/
+	public function addUnion($select) {
+		$this->unions[] = $select;
+		return $this;
+	}
+
+	/**
+	* @param string
+	* @return Xselect
+	*/
+	public function setWhere($where) {
+		$this->where = $where;
+		return $this;
+	}
+
+	/**
+	* @param string
+	* @return Xselect
+	*/
+	public function setHaving($having) {
+		$this->where = $having;
+		return $this;
+	}
+
+	/**
+	* @param string
+	* @return Xselect
+	*/
+	public function setOrder($order) {
+		$this->order = $order;
+		return $this;
+	}
+
+	/**
+	* @return string sql
+	*/
+	public function toString() {
+		$result = 'SELECT '.$this->fieldList."\n";
+		if (is_object($this->from[1]))
+			$result .= 'FROM ('.$this->from[1]->toString().') AS '.$this->from[0]."\n";
+		else
+			$result .= 'FROM '.$this->from[1].' AS '.$this->from[0]."\n";
+		foreach ($this->joins as $join) {
+			$result .= $join[0].' JOIN ';
+			if (is_object($join[2]))
+				$result .= ' ('.$join[2]->toString().') AS '.$join[1].' ON '.$join[3]."\n";
+			else
+				$result .= ' '.$join[2].' AS '.$join[1].' ON '.$join[3]."\n";
+		}
+		foreach ($this->unions as $union) {
+			$result .= 'UNION ALL'."\n".$union->toString()."\n";	
+		}
+		if ($this->where != '')
+			$result .= 'WHERE '.$this->where."\n";
+		if ($this->groups != '')
+			$result .= 'GROUP BY '.$this->groups."\n";
+		if ($this->having != '')
+			$result .= 'HAVING '.$this->having."\n";
+		if ($this->order != '')
+			$result .= 'ORDER BY '.$this->order."\n";
+		return $result;
+	}
+}
 
 ?>

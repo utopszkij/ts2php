@@ -4,12 +4,23 @@
 * 2018
 */
 
-import {Xarray, XARRAY, Xstr, XSTR, Xdb,  
+import {Xarray, XARRAY, Xstr, XSTR, Xdb,  Xselect,
 	_POST, _GET, _SERVER, _CHOCKIE, echo, exit, isset, file_get_contents, 
 	session_start, session_id, base64_decode, base64_encode}
 	from "../ts2php_core/tsphp";
 
 var mytomb = XARRAY();
+
+function Config(name) {
+	var result: string;
+	if (name == 'MYSQL_HOST') result = '127.0.0.1';
+	else if (name == 'MYSQL_USER') result = 'root';
+	else if (name == 'MYSQL_PSW') result = '13Marika';
+	else if (name == 'MYSQL_DB') result = 'netpolgar';
+	else if (name == 'MYSQL_DBPRE') result = 'np_';
+	else if (name == 'DEBUGMODE') result = 'false';
+	return result;
+}
 
 class Szemely {
 	protected _firstName: string;
@@ -88,6 +99,21 @@ where title <> "emty"
 order by created_time
 '*/);
 var records = db.loadObjectList();
+
+var subSelect = new Xselect();
+subSelect.setFieldList('*')
+.setFrom('x', 'table_x');
+
+var select = new Xselect();
+select.setFieldList('a.*, b.title')
+.setFrom('a', 'table_a')
+.addJoin('LEFT OUTER', 'b', 'tabla_b', 'b.id = a.id')
+.addSubselectJoin('RIGHT OUTER', 'c', subSelect, 'c.id = a.id')
+.setWhere('a.id > 0')
+.setOrder('a.title');
+var records = db.loadSelect(select, 10, 100); 
+
+echo(db.getQuery());
 
 exit(2);
 

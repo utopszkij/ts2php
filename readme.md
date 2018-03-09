@@ -19,6 +19,7 @@ Due to the incompatibility of the two languages there are several javascript / t
 should be avoided.
 
 ## version
+V 1.01  in developing; test version. new feature: Object oriented select
 V 1.00  in developing; test version
 
 ## implemented php properties
@@ -83,7 +84,8 @@ A két nyelv inkompatibilitása miatt jónéhány javascript/typescript lehetős
 használatát mellőzni kell.
 
 ## verzió
-V 1.00  fejlesztés altt, teszt verzió
+V 1.01  fejlesztés altt, teszt verzió. Újdonság: object orientált sql select
+V 1.00  fejlesztés altt, teszt verzió. 
 
 ##megvalósított php tulajdonságok
 

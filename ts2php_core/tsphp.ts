@@ -288,49 +288,54 @@ export class Xdb {
 	private sql: string = '';
 
 	// set query string '$paramName' allowed in sql string
-	setQuery(sql?: string): void {
+	setQuery(sql?: string): Xdb {
 		this.sql = sql;
 		return;
 	}
 
 	// define param
-	setParam(paramName: string, value: string): void {
+	public setParam(paramName: string, value: string): Xdb {
 		return;
 	}
 
 	// get query string
-	getQuery(): string {
+	public getQuery(): string {
 		return this.sql;
 	}
 
 	// exec sql
-	query(): boolean {
+	public query(): boolean {
 		return true;
 	}
 
 	// load one record  setted sql: "select ...... limit 1"
-	loadObject():any {
+	public loadObject():any {
 		return {};
 	}
 
 	// load record set  setted sql: "select ........."
-	loadObjectList(): any[] {
+	public loadObjectList(): any[] {
 		return [];
 	}
 
 	// get last sql process error message (OK = '')
-	getErrorMsg(): string {
+	public getErrorMsg(): string {
 		return '';
 	}
 
 	// get last sql process error number (OK = 0)
-	getErrorNum(): number {
+	public getErrorNum(): number {
 		return 0;
 	}
 
 	// adjust value for sql value format
-	quote(s: any): string {
+	public quote(s: any): string {
 		return '"'+s+'"';
+	}
+
+	// load objectList by select object
+	public loadSelect(select: Xselect, limitStart?: number, limit? : number) {
+		return [];
 	}
 }
 
@@ -418,6 +423,44 @@ export class Xfile {
 	public dir_exists(dirName: string): boolean {
 		return true;
 	}
+}
+
+export class Xselect {
+
+	// set select column list exampla:  'a.title, b.*'
+	public setFieldList(s: string): Xselect { return; }
+
+	// set from table Name
+	public setFrom(alias: string, tableName: string): Xselect { return; }
+
+	// set subselect
+	public setSubselect(alias: string, select: Xselect): Xselect { return; }
+
+	// add union
+	public addJoin(joinType: string, alias: string, 
+			table: string, on: string): Xselect { return; }
+
+	// add subselect join
+	public addSubselectJoin(joinType: string, alias: string, 
+			select: Xselect, on: string): Xselect { return; }
+
+	// set group by sql string
+	public setGroups(groups: string): Xselect { return; } 
+
+	// add Union
+	public addUnion(select: Xselect): Xselect { return; }
+
+	// set where sql string
+	public setWhere(where: string): Xselect { return; }
+
+	// set having sql string
+	public setHaving(having: string): Xselect { return; }
+
+	// set order by string
+	public setOrder(order: string): Xselect { return; }
+
+	// generate sql string
+	public toString(): string { return ''; }
 }
 
 // echo to stdoutput

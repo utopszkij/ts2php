@@ -1,0 +1,303 @@
+
+2018-03-07 07:56:19
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:
+result:[]
+
+2018-03-07 07:56:19
+SELECT 
+FROM tablea AS 
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:
+result:[]
+
+2018-03-09 06:39:33
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:
+result:[]
+
+2018-03-09 06:39:33
+SELECT 
+FROM tablea AS a
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:
+result:[]
+
+2018-03-09 06:43:48
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 06:43:48
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 06:43:48
+SELECT 
+FROM tablea AS a
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tablea AS a
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100' at line 2
+result:[]
+
+2018-03-09 06:45:18
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 06:45:18
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 06:45:18
+SELECT 
+FROM tablea AS a
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tablea AS a
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100' at line 2
+result:[]
+
+2018-03-09 06:45:39
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 06:45:39
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 06:45:39
+SELECT a.*, b.title
+FROM tablea AS a
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.tablea' doesn't exist
+result:[]
+
+2018-03-09 06:49:31
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:
+result:[]
+
+2018-03-09 06:49:31
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS LEFT OUTER ON b.id = a.id
+RIGHT OUTER JOIN  tabla_c AS RIGHT OUTER ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:
+result:[]
+
+2018-03-09 06:51:44
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 06:51:44
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 06:51:44
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  tabla_c AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]
+
+2018-03-09 06:54:36
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 06:54:36
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 06:56:09
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 06:56:09
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 06:56:09
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  (SELECT *
+FROM table_x AS x
+) AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]
+
+2018-03-09 07:02:49
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 07:02:49
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 07:02:49
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  (SELECT *
+FROM table_x AS x
+) AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]
+
+2018-03-09 07:05:19
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 07:05:19
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 07:05:19
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  (SELECT *
+FROM table_x AS x
+) AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]
+
+2018-03-09 08:57:21
+set names utf8
+errorMsg:
+result:true
+
+2018-03-09 08:57:21
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-09 08:57:21
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  (SELECT *
+FROM table_x AS x
+) AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]

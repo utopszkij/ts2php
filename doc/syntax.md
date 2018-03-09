@@ -315,15 +315,36 @@
 
 ### public methods
 
-- **setQuery**(str: string)
+- **setQuery**(str: string): Xdb   \'$paramName\' allowed
 - **getQuery**(): string
-- **setParam**(paramName: string, value: string): void
+- **setParam**(paramName: string, value: string): Xdb
 - **getErrorMsg**(): string
 - **getErrorNum**(): number
 - **query**(): boolean
 - **loadObject**(): record_object
 - **loadObjectList**(): any[]
 - **quote**(str): string
+
+## onject oriented sql select; predefined Xselect class
+
+### construction
+
+>name = **new Xselect**();
+ 
+### public methods
+
+- **setFieldList**(s: string): Xselect
+- **setFrom**(alias: string, tableName: string): Xselect
+- **setSubselect**(alias: string, select: Xselect): Xselect
+- **addJoin**(joinType: string, alias: string, tableName: string): Xselect 
+- **addSubselectJoin**(joinType: string, alias: string, subSelect: Xselect): Xselect 
+- **setGroups**(groups: string): Xselect
+- **addUnion**(select: Xselect): Xselect
+- **setWhere**(where: string): Xselect
+- **setHaving**(having: string): Xselect
+- **setOrder**(order: string): Xselect
+- **toString**(): string
+
 
 ## database table handing predefined Xtable class
 
