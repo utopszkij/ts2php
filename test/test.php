@@ -1,5 +1,5 @@
 <?php
-// generated the ts2php 2018.03.09 08:57:11
+// generated the ts2php 2018.03.11 20:09:18
 
 /** 
 * példa ts file 
@@ -9,7 +9,20 @@
 include_once "../ts2php_core/tsphpx.php";
 
 $mytomb = XARRAY();
+$szam = 120;
 
+switch ($szam) {
+	case 0:
+		echo('nulla');
+		break;	
+	case 1:
+		echo('egy');
+		break;	
+	default:
+		echo('más');
+		break;	
+}
+	
 function Config($name) {
 	$result;
 	if ($name == 'MYSQL_HOST') $result = '127.0.0.1';

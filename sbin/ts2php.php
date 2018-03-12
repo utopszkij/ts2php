@@ -245,8 +245,10 @@ function processDec(& $ts, $t) {
 	global $exitCode;
 	$result = '';
 	$t1 = $ts->getBlankToken(); // ' ';
-	$t2 = $ts->getToken(); // név
-	if (!mnemonic($t2)) {
+	$t2 = $ts->getToken(); // név vagy $ jel
+	if ($t2 == '$') {
+		$t2 .= $ts->getToken();
+	} else if (!mnemonic($t2)) {
 		echo 'ts2php syntax error line='.$ts->lno.' '.$t2.' not mnemonic '."\n"; 
 		$exitCode = 1;
 	}
@@ -254,7 +256,10 @@ function processDec(& $ts, $t) {
 	if ($t3 == ':') {
 		// property deklaráció class -ban
 		$ts->backToken($t3);
-		$result .=  $t.$t1.'$'.$t2;
+		if ($t2[0] != '$') 
+			$result .=  $t.$t1.'$'.$t2;
+		else
+			$result .=  $t.$t1.$t2;
 	} else if ($t3 == '(') {
 		// method declaráció class -ban
 		$ts->backToken($t3);
@@ -444,10 +449,14 @@ function processComment(& $ts) {
 	return $w;
 }
 
+function processCase(& $ts, $t) {
+	return parser($ts, 'caseTerm', 'caseTerm');
+}
+
 /**
 * parse tsString, $result .=  php string
 * @param Ts
-* @param string terminator: ] or }
+* @param string terminator: ] or } or 'caseTerm'
 * @param string terminator $result .=  string
 * @return string
 */	
@@ -455,8 +464,14 @@ function parser(& $ts, $terminator, $terminatorResult) {
 	global $exitCode;
 	$result = '';
 	$lastToken = '';
+	$caseTerminators = array();
+	if ($terminator == 'caseTerm') {
+		$caseTerminators[] = 'case';
+		$caseTerminators[] = 'default';
+		$caseTerminators[] = '}';
+	}
 	$t = $ts->getToken();
-	while ((!$ts->eof()) & ($t != $terminator)) {
+	while ((!$ts->eof()) & ($t != $terminator) & (!in_array($t, $caseTerminators))) {
 		if ($t == '/*') {
 			$ts->backToken($t);
 			$result .= processComment($ts);
@@ -464,9 +479,13 @@ function parser(& $ts, $terminator, $terminatorResult) {
 		} else if ($t == 'class') {
 			$result .= processClass($ts);
 			$lastToken = 'classname';
-		} else if (($t == 'if') | ($t == 'else') | ($t == 'while') | ($t == 'return')) {
+		} else if (($t == 'if') | ($t == 'else') | ($t == 'while') | 
+					($t == 'return') | ($t == 'switch') | 
+					($t == 'break')) {
 			$result .=  $t;
 			$lastToken = $t;
+		} else if (($t == 'case') | ($t == 'default')) {
+			$result .= $t.processCase($ts,$t);	
 		} else if ($t == 'var') {
 			$t1 = $ts->getBlankToken();
 		} else if ($t == 'new') {
@@ -479,6 +498,9 @@ function parser(& $ts, $terminator, $terminatorResult) {
 			$lastToken = $t;
 		} else if ($t == ':') {
 			if ($terminatorResult == "}')") {
+				$result .=  $t;
+				$lastToken = $t;
+			} else if ($terminatorResult == "caseTerm") {
 				$result .=  $t;
 				$lastToken = $t;
 			} else {
@@ -526,6 +548,9 @@ function parser(& $ts, $terminator, $terminatorResult) {
 		} else if ($t == 'Math') {
 			$result .=  'MATH()';
 			$lastToken = $t;
+		} else if ($t == 'JSON') {
+			$result .=  'JSON()';
+			$lastToken = $t;
 		} else if ($t == 'for') {
 			$result .= processFor($ts, $t);
 			$lastToken = $t;
@@ -547,7 +572,10 @@ function parser(& $ts, $terminator, $terminatorResult) {
 		}
 		$t = $ts->getToken();
 	} // while
-	$result .=  $terminatorResult;
+	if ($terminatorResult == 'caseTerm')
+		$ts->backToken($t);
+	else
+		$result .=  $terminatorResult;
 	return $result;
 }
 

@@ -19,6 +19,7 @@ Due to the incompatibility of the two languages there are several javascript / t
 should be avoided.
 
 ## version
+V 1.02  in developing; test version. new feature: switch support, geany support 
 V 1.01  in developing; test version. new feature: Object oriented select
 V 1.00  in developing; test version
 
@@ -35,6 +36,8 @@ V 1.00  in developing; test version
 - GET, POST, file_get_content treatment
 - mysql treatment
 - file and directory management
+- JSON handing
+- hash handing
 
 ## licence
 GNU/GPL
@@ -84,6 +87,7 @@ A két nyelv inkompatibilitása miatt jónéhány javascript/typescript lehetős
 használatát mellőzni kell.
 
 ## verzió
+V 1.02  fejlesztés altt, teszt verzió. Újdonság: switch támogatás, geany támogatás
 V 1.01  fejlesztés altt, teszt verzió. Újdonság: object orientált sql select
 V 1.00  fejlesztés altt, teszt verzió. 
 
@@ -100,6 +104,8 @@ V 1.00  fejlesztés altt, teszt verzió.
 - GET, POST, file_get_content kezelés
 - mysql kezelés
 - file és könyvtár kezelés
+- json kezelés
+- hash kezelés
 
 ## licensz
 GNU/GPL

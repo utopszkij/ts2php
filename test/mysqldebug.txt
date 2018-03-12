@@ -301,3 +301,61 @@ ORDER BY a.title
 LIMIT 10,100
 errorMsg:Table 'netpolgar.table_a' doesn't exist
 result:[]
+
+2018-03-11 20:06:49
+set names utf8
+errorMsg:
+result:true
+
+2018-03-11 20:06:50
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-11 20:06:50
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  (SELECT *
+FROM table_x AS x
+) AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]
+
+2018-03-11 20:09:21
+set names utf8
+errorMsg:
+result:true
+
+2018-03-11 20:09:21
+ 
+select *
+from np_tableName
+where title <> "emty"
+order by created_time
+
+errorMsg:Table 'netpolgar.np_tableName' doesn't exist
+result:[]
+
+2018-03-11 20:09:21
+SELECT a.*, b.title
+FROM table_a AS a
+LEFT OUTER JOIN  tabla_b AS b ON b.id = a.id
+RIGHT OUTER JOIN  (SELECT *
+FROM table_x AS x
+) AS c ON c.id = a.id
+WHERE a.id > 0
+ORDER BY a.title
+
+LIMIT 10,100
+errorMsg:Table 'netpolgar.table_a' doesn't exist
+result:[]

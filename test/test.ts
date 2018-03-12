@@ -10,7 +10,20 @@ import {Xarray, XARRAY, Xstr, XSTR, Xdb,  Xselect,
 	from "../ts2php_core/tsphp";
 
 var mytomb = XARRAY();
+var szam: number = 120;
 
+switch (szam) {
+	case 0:
+		echo('nulla');
+		break;	
+	case 1:
+		echo('egy');
+		break;	
+	default:
+		echo('más');
+		break;	
+}
+	
 function Config(name) {
 	var result: string;
 	if (name == 'MYSQL_HOST') result = '127.0.0.1';

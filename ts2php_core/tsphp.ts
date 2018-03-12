@@ -342,7 +342,7 @@ export class Xdb {
 /**
 * sql table handing  (impelemented only php)
 */
-export class XTable {
+export class Xtable {
 	constructor(db: Xdb, tableName: string, keyName?: string) {}
 
 	// insert nyew record param: record object
@@ -483,6 +483,9 @@ export function isset(x?: any): boolean {
 	}
 	return result;
 }
+export function unset(x: any): void {
+	x = undefined;
+}
 
 // php file_get_contests implemented only php
 export function file_get_contents(s: string): string {
@@ -500,4 +503,6 @@ export function base64_encode(s: string): string {
 export function base64_decode(s: string): string {
 	return s;
 }
-
+export function hash(algo: string, str: string): string {
+	return str;
+}

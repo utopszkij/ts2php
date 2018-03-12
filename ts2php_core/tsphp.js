@@ -306,24 +306,24 @@ exports.Xdb = Xdb;
 /**
 * sql table handing  (impelemented only php)
 */
-var XTable = (function () {
-    function XTable(db, tableName, keyName) {
+var Xtable = (function () {
+    function Xtable(db, tableName, keyName) {
     }
     // insert nyew record param: record object
-    XTable.prototype.insert = function (record) { return true; };
+    Xtable.prototype.insert = function (record) { return true; };
     // update one record param: record object
-    XTable.prototype.update = function (ecord) { return true; };
+    Xtable.prototype.update = function (ecord) { return true; };
     // insert or update one record  paraM. record object
-    XTable.prototype.save = function (record) { return true; };
+    Xtable.prototype.save = function (record) { return true; };
     // remove one record  param: key balue
-    XTable.prototype.remove = function (id) { return true; };
+    Xtable.prototype.remove = function (id) { return true; };
     // get last error Number
-    XTable.prototype.getErrorNum = function () { return 0; };
+    Xtable.prototype.getErrorNum = function () { return 0; };
     // get last error msg
-    XTable.prototype.getErrorMsg = function () { return ''; };
-    return XTable;
+    Xtable.prototype.getErrorMsg = function () { return ''; };
+    return Xtable;
 })();
-exports.XTable = XTable;
+exports.Xtable = Xtable;
 /**
 * file processing  implemented only in php
 */
@@ -427,6 +427,10 @@ function isset(x) {
     return result;
 }
 exports.isset = isset;
+function unset(x) {
+    x = undefined;
+}
+exports.unset = unset;
 // php file_get_contests implemented only php
 function file_get_contents(s) {
     return '';
@@ -446,3 +450,7 @@ function base64_decode(s) {
     return s;
 }
 exports.base64_decode = base64_decode;
+function hash(algo, str) {
+    return str;
+}
+exports.hash = hash;

@@ -691,5 +691,20 @@ class Xfile {
 		return is_dir($path);
 	}
 }
+
+/**
+* JSON hamding
+*/
+class Json {
+	public function parse($s) {
+		return JSON_decode($s);
+	}
+	public function stringify($obj) {
+		return JSON_encode($obj);
+	}
+}
+function JSON() {
+	return new Json();
+}
 ?>
 

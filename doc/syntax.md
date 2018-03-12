@@ -26,6 +26,8 @@
 
 >\-12.13
 
+>undefined
+
 ## variable names
 
 >small and large letters, digits and underscore, begins with the letter	
@@ -34,9 +36,11 @@
 
 - **number**
 - **string**
+- **boolean**
 - **any**
 - **number[]**
 - **string[]**
+- **boolean[]**
 - **any[]**
 - **void**
 - defined class names
@@ -109,6 +113,22 @@
 
 >**if** (logical expression) { code } **else** { code }
 
+>**switch**
+```
+switch (expression) {
+	case value :
+		code...;
+		break;
+	case value :
+		code...;
+		break;
+	....
+	default :
+		code...;
+		break;		
+}
+```
+>The default section is optional.
 ## lopps
 
 - **for** (name = expression; logical_expression;  code) { code}
@@ -169,6 +189,11 @@
 - **toLocaleTimeString**() 	Returns the time portion of a Date object as a string, using locale conventions
 - **toLocaleString**() 	Converts a Date object to a string, using locale conventions
 
+## json handing;  predefined JSOB object
+
+> **JSON.parse**(s: string): object
+> **JSON.stringify**(obj: object) : string
+
 ## predefined global functions
 
 - **decodeURI**(s: string): string 	Decodes a URI
@@ -191,10 +216,13 @@
 - **echo**(str: string): void
 - **exit**(x: number): void
 - **isset**(x:any): boolean
+- **unset**(x:any):void
 - **session_start**(): void
 - **session_id**(x?: number): number
 - **base64_encode**(s: string): string
 - **base64_decode**(s: string): string
+- **hash**(algo: string; str: string): string //algo: 'sha256' | 'md5'
+- **file_get_contents**(s:string):string
 
 ## classes, objects
 ### declare class
@@ -223,6 +251,8 @@
 
 >name = { json object string not include function }
 
+>warning: can use ", but can'not use '
+
 ### use object public property in expression
 
 >objectName.propertyName
@@ -239,7 +269,23 @@
 
 >**this**.methodName(value list)
 
+### use variable for property/function  name
 
+>example:
+```
+class Test {
+	private $varName; // for typescript syntax only
+	private A:string;
+	
+	public set(varName: string, value:string):void {
+		this.$varName = value;
+	}
+}
+
+var test = new Test();
+test.set('A','abc');  equivalent:  test.A = 'abc';
+
+```
 
 ## String handing;  predefined Xstr objects for php compability
 ### constructor
@@ -376,6 +422,8 @@
 - **rmdir**(fileName: string): boolean
 - **mkdir**(path: string, mod: string): boolean      mod example: '0777'
 - **chmod**(fileName: string, mod: string): boolean  mod example: '0777'
+- **file_exists**(fileName: string): boolean
+- **dir_exists**(path: string): boolean
 
 ## embed HTML code
 
